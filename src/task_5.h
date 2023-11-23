@@ -4,26 +4,24 @@
  * Name:
  */
 #include <iostream>
-#include <cmath>
+#include <cstring>
 using namespace std;
 
-bool isPrime(int n, int divisor = 2) {
-    if (n < 2) {
-        return false;  // Numbers less than 2 are not prime
-    } else if (divisor > sqrt(n)) {
-        return true;  // If no divisor found, it's a prime number
-    } else if (n % divisor == 0) {
-        return false;  // If n is divisible by the current divisor, it's not prime
+bool isPalindrome(const char* word, int start, int end) {
+    if (start >= end) {
+        return true;  // Empty string or single-character string is a palindrome
+    } else if (word[start] != word[end]) {
+        return false;  // Characters at the corresponding positions do not match
     } else {
-        return isPrime(n, divisor + 1);  // Check the next divisor
+        return isPalindrome(word, start + 1, end - 1);  // Check the next pair of characters
     }
 }
 
 int main() {
-    int n;
-    cin >> n;
+    char word[100];
+    cin >> word;
 
-    if (isPrime(n)) {
+    if (isPalindrome(word, 0, strlen(word) - 1)) {
         cout << "YES" << endl;
     } else {
         cout << "NO" << endl;
